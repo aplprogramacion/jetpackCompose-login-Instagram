@@ -155,7 +155,13 @@ fun LoginButton(loginEnable: Boolean) {
     Button(
         onClick = { },
         enabled = loginEnable,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color(0xFF4EA8E9),
+            disabledBackgroundColor = Color(0xFF78C8F9),
+            contentColor = Color.White,
+            disabledContentColor = Color.White
+        )
     ) {
         Text(text = "Login")
 
