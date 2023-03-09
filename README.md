@@ -3,4 +3,4 @@
 
 # Login de instagram creado con jet pack compose
 
-la idea era crear un login lo mas parecido posible a instagram y este fue el resultado :).
+El reto es crear un login lo mas parecido posible a instagram y este fue el resultado :).
