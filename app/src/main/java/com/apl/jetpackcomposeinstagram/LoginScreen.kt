@@ -2,6 +2,7 @@ package com.apl.jetpackcomposeinstagram
 
 
 import android.app.Activity
+import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,6 +14,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -26,6 +28,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.util.regex.Pattern
 
 
 @Composable
@@ -87,9 +90,14 @@ fun Body(modifier: Modifier) {
     Column(modifier = modifier) {
         ImageLogo(Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.size(16.dp))
-        Email(email.value) { email.value = it }
+        Email(email.value) {
+            email.value = it
+            isLoginEnable.value = enableLogin(email.value, password.value)
+        }
         Spacer(modifier = Modifier.size(4.dp))
-        Password(password.value) { password.value = it }
+        Password(password.value) {
+            password.value = it
+            isLoginEnable.value = enableLogin(email.value, password.value)}
         Spacer(modifier = Modifier.size(8.dp))
         ForgotPassword(Modifier.align(Alignment.End))
         Spacer(modifier = Modifier.size(16.dp))
@@ -167,6 +175,10 @@ fun LoginButton(loginEnable: Boolean) {
 
     }
 }
+
+fun enableLogin(email:String, password: String): Boolean =
+    Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.length > 6
+
 
 @Composable
 fun ForgotPassword(modifier: Modifier) {
